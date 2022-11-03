@@ -2,22 +2,27 @@ import React from "react";
 import { GetStaticProps } from 'next'
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 import { GET_CONTENT, GET_URI } from "@/lib/queries/get-wp";
-import { Data } from "@/lib/queries/menus-type"
+import { HeaderMenus } from "@/lib/queries/menus-type"
 
 type Props = {
-    headerMenus: Data
+    headerMenus: HeaderMenus
 };
 
 export default function demo2({ headerMenus }: Props) {
 
-    console.log(headerMenus)
 
     return (
         <div>
             <h1>DEMO</h1>
             <ul>
-                {headerMenus?.headerMenus?.edges.map((menu,i) => (
-                    <li key={i}>{menu.node.label}</li>
+                {headerMenus?.edges.map((menu,i) => (
+                    <li key={i}>{menu?.node?.label}
+                        <ul>
+                            {menu?.node?.childItems?.nodes.map((submenu,j) => (
+                                <li>{submenu.label}</li>
+                            ))}
+                        </ul>
+                    </li>
                 ))}
             </ul>
         </div>
@@ -33,7 +38,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { data } = await client.query({
         query: GET_CONTENT,
     });
-    const headerMenus = data
+    const headerMenus = data?.headerMenus
 
     return {
         props: {
