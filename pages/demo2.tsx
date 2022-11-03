@@ -19,7 +19,7 @@ export default function demo2({ headerMenus }: Props) {
                     <li key={i}>{menu?.node?.label}
                         <ul>
                             {menu?.node?.childItems?.nodes.map((submenu,j) => (
-                                <li>{submenu.label}</li>
+                                <li>{submenu?.label}</li>
                             ))}
                         </ul>
                     </li>
