@@ -1,0 +1,10 @@
+.header {
+    background-color: #000;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+.header li {
+    display: inline-block;
+    margin: 0 20px;
+}
