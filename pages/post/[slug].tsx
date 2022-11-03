@@ -1,12 +1,12 @@
 import React from "react";
-import { getAllPagesWithSlugs, getPageBySlug, getAllPostsWithSlugs, getPostBySlug } from '../../lib/api';
+import { getAllPagesWithSlugs, getPageBySlug, getAllPostsWithSlugs, getPostBySlug ,getAllHeader} from '../../lib/api';
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css'
 
 
 //----------------POSTS-----------------//
 
-export default function Post(post) {
+export default function Post({post}:any) {
     return (
         <div className={styles.container}>
             <Head>
@@ -24,15 +24,15 @@ export default function Post(post) {
 export async function getStaticPaths() {
     const postsWithSlugs = await getAllPostsWithSlugs();
     return {
-        paths: postsWithSlugs?.edges.map(({ node }) => `/post/${node.slug}`) || [],
+        paths: postsWithSlugs?.edges.map(({ node }:any) => `/post/${node.slug}`) || [],
         fallback: true,
     };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }:any) {
     const post = await getPostBySlug(params.slug);
-    console.log(post)
+    const headerMenus = await getAllHeader()
     return {
-        props: post
+        props: {post,headerMenus}
     };
 }

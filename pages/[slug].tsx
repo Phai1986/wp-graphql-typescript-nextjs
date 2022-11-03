@@ -1,12 +1,12 @@
 import React from "react";
-import { getAllPagesWithSlugs, getPageBySlug, getAllPostsWithSlugs, getPostBySlug } from '../lib/api';
+import { getAllPagesWithSlugs, getPageBySlug, getAllPostsWithSlugs, getPostBySlug, getAllHeader } from '../lib/api';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css'
 
 
 //----------------PAGES-----------------//
 
-export default function Page(page) {
+export default function Page({page}:any) {
     return (
         <div className={styles.container}>
             <Head>
@@ -24,15 +24,16 @@ export default function Page(page) {
 export async function getStaticPaths() {
     const pagesWithSlugs = await getAllPagesWithSlugs();
     return {
-        paths: pagesWithSlugs?.edges.map(({ node }) => `/${node.slug}`) || [],
+        paths: pagesWithSlugs?.edges.map(({ node }:any) => `/${node.slug}`) || [],
         fallback: true,
     };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }:any) {
     const page = await getPageBySlug(params.slug);
+    const headerMenus = await getAllHeader()
     return {
-        props: page
+        props: {page, headerMenus}
     };
 }
 

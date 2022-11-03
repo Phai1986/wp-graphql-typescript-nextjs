@@ -20,7 +20,7 @@ export default function Test({ contents }: any) {
 
             <ul>
                 {contents.pages.map((content: any, i: any) => (
-                    <li style={{ display: 'inline-block', margin: '0 5px' }}>{content.node.title}</li>
+                    <li key={i} style={{ display: 'inline-block', margin: '0 5px' }}>{content.node.title}</li>
                 ))}
             </ul>
         </div>

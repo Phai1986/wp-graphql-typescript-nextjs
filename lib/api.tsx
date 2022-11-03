@@ -1,42 +1,75 @@
 // const API_URL = process.env.WP_URL;
 
-async function fetchAPI(query, { variables } = {}) {
-    const headers = { 'Content-Type': 'application/json' };
+async function fetchAPI(query: any, { variables }: any = {}) {
+  const headers = { 'Content-Type': 'application/json' };
 
-    const res = await fetch('https://wpgraphql.digitiv.net/graphql', {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ query, variables }),
-    });
+  const res = await fetch('https://wpgraphql.digitiv.net/graphql', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ query, variables }),
+  });
 
-    const json = await res.json();
-    if (json.errors) {
-        console.log(json.errors);
-        throw new Error('Failed to fetch API');
+  const json = await res.json();
+  if (json.errors) {
+    console.log(json.errors);
+    throw new Error('Failed to fetch API');
+  }
+
+  return json.data;
+}
+
+//-----------------------Menus header------------------------//
+
+export async function getAllHeader() {
+  const data = await fetchAPI(`
+{
+  headerMenus: menuItems(where: {location: HCMS_MENU_HEADER, parentId: "0"}) {
+    edges {
+      node {
+        id
+        label
+        path
+        url
+        childItems {
+          nodes {
+            id
+            label
+            path
+            url
+          }
+        }
+      }
     }
-
-    return json.data;
+  }
+}
+`);
+  return data?.headerMenus;
 }
 
 //-----------------------Posts------------------------//
 
 export async function getAllPostsWithSlugs() {
-    const data = await fetchAPI(`
+  const data = await fetchAPI(`
   {
     posts(first: 10000) {
       edges {
         node {
+          id
+          title
+          date
+          uri
+          content
           slug
         }
       }
     }
   }
   `);
-    return data?.posts;
+  return data?.posts;
 }
 
-export async function getPostBySlug(slug) {
-    const data = await fetchAPI(`
+export async function getPostBySlug(slug: any) {
+  const data = await fetchAPI(`
   {
     post(id: "${slug}", idType: URI) {
       title
@@ -44,28 +77,30 @@ export async function getPostBySlug(slug) {
     }
   }
   `);
-    return data?.post;
+  return data?.post;
 }
 
 //-----------------------Pages------------------------//
 
 export async function getAllPagesWithSlugs() {
-    const data = await fetchAPI(`
+  const data = await fetchAPI(`
   {
     pages(first: 10000) {
       edges {
         node {
+          title
           slug
+          uri
         }
       }
     }
   }
   `);
-    return data?.pages;
+  return data?.pages;
 }
 
-export async function getPageBySlug(slug) {
-    const data = await fetchAPI(`
+export async function getPageBySlug(slug: any) {
+  const data = await fetchAPI(`
   {
     page(id: "${slug}", idType: URI) {
       title
@@ -73,7 +108,7 @@ export async function getPageBySlug(slug) {
     }
   }
   `);
-    return data?.page;
+  return data?.page;
 }
 
 

@@ -1,76 +1,53 @@
 import React from "react";
-import { GetStaticProps } from 'next'
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { getAllHeader, getAllPagesWithSlugs, getAllPostsWithSlugs } from '../lib/api';
+import { HeaderMenus, Pages, Posts } from "@/lib/queries/type"
 import Link from "next/link";
-import { GET_CONTENT, GET_URI } from "@/lib/queries/get-wp";
-import Test from "@/components/Test";
 
+type Props = {
+    posts: Posts,
+    pages: Pages
+};
 
-export default function graphql({ contents }: any) { 
+export default function graphql({ posts, pages }: Props) {
+
+    console.log(pages)
 
     return (
-        <>            
-            <div className="content">
+        <div className="content">
 
-                <Test contents={contents} />
+            <h1>PAGES</h1>
 
-                <h1>PAGES</h1>
+            <ul className="pages">
+                {pages?.edges.map((page, i) => (
+                    <li key={i}>
+                        <Link href={page?.node?.uri}>
+                            {page?.node?.title}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
 
-                <ul className="pages">
-                    {contents.pages.map((page: any, i: any) => {
-                        return (
-                            <li key={i}>
-                                <h2>
-                                    <Link href={page.node.slug}>
-                                        <a>
-                                            {page.node.title}
-                                        </a>
-                                    </Link>
-                                </h2>
-                            </li>
-                        )
-                    })}
-                </ul>
+            <h1>POSTS</h1>
 
-                <h1>POSTS</h1>
+            <ul className="pages">
+                {posts?.edges.map((post, i) => (
+                    <li key={i}>
+                        <Link href={`/post/${post?.node?.uri}`}>
+                            {post?.node?.title}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
 
-                <ul className="posts">
-                    {contents.posts.map((post: any, i: any) => {
-                        return (
-                            <li key={i}>
-                                <h2>
-                                    <Link href={`/post/${post.node.slug}`}>
-                                        <a>
-                                            {post.node.title}
-                                        </a>
-                                    </Link>
-                                </h2>
-                            </li>
-                        )
-                    })} 
-                </ul>
-
-            </div>
-        </>
+        </div>
     )
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
-    const client = new ApolloClient({
-        uri: GET_URI,
-        cache: new InMemoryCache(),
-    });
-    const { data } = await client.query({
-        query: GET_CONTENT,
-    });
-    const posts = data.posts?.edges
-    const pages = data.pages?.edges
-    
+export async function getStaticProps() {
+    const posts = await getAllPostsWithSlugs()
+    const pages = await getAllPagesWithSlugs()
+    const headerMenus = await getAllHeader()
     return {
-        props: {
-            contents: {
-                posts, pages
-            }
-        }
-    }
+        props: { headerMenus, posts, pages }
+    };
 }
