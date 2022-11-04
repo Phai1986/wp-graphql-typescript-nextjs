@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         cache: new InMemoryCache(),
     });
     const { data } = await client.query({
-        query: GET_CONTENT,
+        query: gql`${GET_CONTENT}`,
     });
     const headerMenus = await getHeader()
 

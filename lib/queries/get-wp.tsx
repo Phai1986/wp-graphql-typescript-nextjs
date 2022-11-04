@@ -2,7 +2,7 @@ import { gql } from "@apollo/client"
 
 export const GET_URI = 'https://wpgraphql.digitiv.net/graphql'
 
-export const GET_CONTENT = gql`
+export const GET_CONTENT = `
 query MyQuery {
     headerMenus: menuItems(where: {location: HCMS_MENU_HEADER, parentId: "0"}) {
         edges {
