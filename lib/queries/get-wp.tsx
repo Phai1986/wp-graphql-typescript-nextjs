@@ -67,7 +67,7 @@ export const GET_HEADER = `
   }
 }
 `
-export const GET_POSES = `
+export const GET_POSTS = `
 {
   posts(first: 10000) {
     edges {

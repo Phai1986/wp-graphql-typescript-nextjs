@@ -1,4 +1,4 @@
-import {GET_URI, GET_HEADER, GET_POSES, GET_PAGES} from '@/lib/queries/get-wp'
+import {GET_URI, GET_HEADER, GET_POSTS, GET_PAGES} from '@/lib/queries/get-wp'
 
 async function fetchAPI(query: any, { variables }: any = {}) {
   const headers = { 'Content-Type': 'application/json' };
@@ -28,7 +28,7 @@ export async function getHeader() {
 //-----------------------Posts------------------------//
 
 export async function getPosts() {
-  const data = await fetchAPI(GET_POSES);
+  const data = await fetchAPI(GET_POSTS);
   return data;
 }
 
