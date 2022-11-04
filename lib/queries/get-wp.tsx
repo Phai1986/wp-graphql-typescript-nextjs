@@ -75,9 +75,13 @@ export const GET_POSTS = `
         id
         title
         date
-        uri
         content
         slug
+        uri
+        video {
+          videoSource
+          videoUrl
+        }
       }
     }
   }

@@ -30,6 +30,9 @@
   max-width: 100%;
   height: inherit;
 }
+.main .iframe {
+  margin: 40px 0;
+}
 
 .footer {
   display: flex;

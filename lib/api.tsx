@@ -38,6 +38,10 @@ export async function getPostBySlug(slug: any) {
     post(id: "${slug}", idType: URI) {
       title
       content
+      video {
+        videoSource
+        videoUrl
+      }
     }
   }
   `);

@@ -8,6 +8,7 @@ import { getHeader, getPages, getPageBySlug } from '@/lib/api';
 
 
 export default function Page({ page }: any) {
+
     return (
         <>
             <Head>
