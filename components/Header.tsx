@@ -16,7 +16,7 @@ type Props = {
 export default function Header({ headerMenus }: Props) {
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" sticky="top">
       <Container>
         <Navbar.Brand>WP GraphQL / TypeScript</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

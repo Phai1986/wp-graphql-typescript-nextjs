@@ -9,15 +9,13 @@ import { getHeader, getPosts, getPostBySlug } from '@/lib/api';
 export default function Post({ post }: any) {
     return (
         <Container>
-            <div className={styles.container}>
-                <Head>
-                    <title>{post.title}</title>
-                    <link rel='icon' href='/favicon.ico' />
-                </Head>
-                <div className={styles.main}>
-                    <h1 className='title'>{post.title}</h1>
-                    <div className='content' dangerouslySetInnerHTML={{ __html: post.content }} />
-                </div>
+            <Head>
+                <title>{post.title}</title>
+                <link rel='icon' href='/favicon.ico' />
+            </Head>
+            <div className={styles.main}>
+                <h1 className='title'>{post.title}</h1>
+                <div className='content' dangerouslySetInnerHTML={{ __html: post.content }} />
             </div>
         </Container>
     );

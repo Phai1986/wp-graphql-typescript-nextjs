@@ -1,7 +1,11 @@
 import React from "react";
 import Head from 'next/head';
-import Link from "next/link";
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Link from "next/link";
 
 import { getHeader, getPosts } from '@/lib/api';
 import { Data } from "@/lib/queries/type"
@@ -18,21 +22,21 @@ export default function Posts({ posts }: Props) {
                 <title>Posts</title>
             </Head>
             <Container>
-                <div className="content">
-
-                    <h1>POSTS</h1>
-
-                    <ul className="pages">
-                        {posts?.posts?.edges.map((post, i) => (
-                            <li key={i}>
-                                <Link href={`/post/${post?.node?.uri}`}>
-                                    {post?.node?.title}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-
-                </div>
+                <h1 className="text-center" style={{ margin: '40px 0' }}>POSTS</h1>
+                <Row>
+                    {posts?.posts?.edges.map((post, i) => (
+                        <Col lg={4} style={{ margin: '0 0 25px' }}>
+                            <Card style={{ width: '100%' }}>
+                                <Card.Img variant="top" src="https://slp-statics.astockcdn.net/static_assets/staging/22fall/homepage/curated-collections/card-2.jpg?width=580" />
+                                <Card.Body>
+                                    <Card.Title>{post?.node?.title}</Card.Title>
+                                    <Card.Text></Card.Text>
+                                    <Link href={`/post/${post?.node?.uri}`}><a><Button variant="primary">Go somewhere</Button></a></Link>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
             </Container>
         </>
     )
