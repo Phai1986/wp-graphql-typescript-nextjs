@@ -1,13 +1,13 @@
 import React from "react";
-import css from "@/styles/Header.module.css"
-import { getHeader } from '@/lib/api';
-import { Data } from "@/lib/queries/type"
-
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Link from "next/link";
+
+import { getHeader } from '@/lib/api';
+import { Data } from "@/lib/queries/type"
+
 
 type Props = {
   headerMenus: Data
