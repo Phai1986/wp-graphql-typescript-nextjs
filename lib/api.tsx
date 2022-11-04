@@ -1,9 +1,9 @@
-// const API_URL = process.env.WP_URL;
+import {GET_URI, GET_HEADER, GET_POSES, GET_PAGES} from '@/lib/queries/get-wp'
 
 async function fetchAPI(query: any, { variables }: any = {}) {
   const headers = { 'Content-Type': 'application/json' };
 
-  const res = await fetch('https://wpgraphql.digitiv.net/graphql', {
+  const res = await fetch(GET_URI, {
     method: 'POST',
     headers,
     body: JSON.stringify({ query, variables }),
@@ -18,54 +18,18 @@ async function fetchAPI(query: any, { variables }: any = {}) {
   return json.data;
 }
 
-//-----------------------Menus header------------------------//
+//-----------------------Header------------------------//
 
-export async function getAllHeader() {
-  const data = await fetchAPI(`
-{
-  headerMenus: menuItems(where: {location: HCMS_MENU_HEADER, parentId: "0"}) {
-    edges {
-      node {
-        id
-        label
-        path
-        url
-        childItems {
-          nodes {
-            id
-            label
-            path
-            url
-          }
-        }
-      }
-    }
-  }
-}
-`);
-  return data?.headerMenus;
+export async function getHeader() {
+  const data = await fetchAPI(GET_HEADER);
+  return data;
 }
 
 //-----------------------Posts------------------------//
 
-export async function getAllPostsWithSlugs() {
-  const data = await fetchAPI(`
-  {
-    posts(first: 10000) {
-      edges {
-        node {
-          id
-          title
-          date
-          uri
-          content
-          slug
-        }
-      }
-    }
-  }
-  `);
-  return data?.posts;
+export async function getPosts() {
+  const data = await fetchAPI(GET_POSES);
+  return data;
 }
 
 export async function getPostBySlug(slug: any) {
@@ -82,21 +46,9 @@ export async function getPostBySlug(slug: any) {
 
 //-----------------------Pages------------------------//
 
-export async function getAllPagesWithSlugs() {
-  const data = await fetchAPI(`
-  {
-    pages(first: 10000) {
-      edges {
-        node {
-          title
-          slug
-          uri
-        }
-      }
-    }
-  }
-  `);
-  return data?.pages;
+export async function getPages() {
+  const data = await fetchAPI(GET_PAGES);
+  return data;
 }
 
 export async function getPageBySlug(slug: any) {
@@ -111,29 +63,3 @@ export async function getPageBySlug(slug: any) {
   return data?.page;
 }
 
-
-// export async function getLatestPosts() {
-//     const data = await fetchAPI(
-//         `
-//       query AllPosts {
-//         posts(first: 10, where: { orderby: { field: DATE, order: DESC } }) {
-//           edges {
-//             node {
-//               id
-//               title
-//               excerpt
-//               content
-//               featuredImage {
-//                 node {
-//                   sourceUrl
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     `
-//     );
-
-//     return data?.posts;
-// }

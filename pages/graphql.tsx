@@ -1,11 +1,11 @@
 import React from "react";
-import { getAllHeader, getAllPagesWithSlugs, getAllPostsWithSlugs } from '../lib/api';
-import { HeaderMenus, Pages, Posts } from "@/lib/queries/type"
+import { getHeader, getPages, getPosts } from '../lib/api';
+import { Data } from "@/lib/queries/type"
 import Link from "next/link";
 
 type Props = {
-    posts: Posts,
-    pages: Pages
+    posts: Data,
+    pages: Data
 };
 
 export default function graphql({ posts, pages }: Props) {
@@ -18,7 +18,7 @@ export default function graphql({ posts, pages }: Props) {
             <h1>PAGES</h1>
 
             <ul className="pages">
-                {pages?.edges.map((page, i) => (
+                {pages?.pages?.edges.map((page, i) => (
                     <li key={i}>
                         <Link href={page?.node?.uri}>
                             {page?.node?.title}
@@ -30,7 +30,7 @@ export default function graphql({ posts, pages }: Props) {
             <h1>POSTS</h1>
 
             <ul className="pages">
-                {posts?.edges.map((post, i) => (
+                {posts?.posts?.edges.map((post, i) => (
                     <li key={i}>
                         <Link href={`/post/${post?.node?.uri}`}>
                             {post?.node?.title}
@@ -44,9 +44,9 @@ export default function graphql({ posts, pages }: Props) {
 }
 
 export async function getStaticProps() {
-    const posts = await getAllPostsWithSlugs()
-    const pages = await getAllPagesWithSlugs()
-    const headerMenus = await getAllHeader()
+    const posts = await getPosts()
+    const pages = await getPages()
+    const headerMenus = await getHeader()
     return {
         props: { headerMenus, posts, pages }
     };

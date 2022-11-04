@@ -8,7 +8,7 @@ type Props = {
     headerMenus: HeaderMenus
 };
 
-export default function demo2({ headerMenus }: Props) {
+export default function apollo_demo({ headerMenus }: Props) {
 
 
     return (

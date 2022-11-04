@@ -1,11 +1,11 @@
 import React from "react";
 import css from "@/styles/Header.module.css"
 import { getAllPagesWithSlugs, getPageBySlug, getAllPostsWithSlugs, getPostBySlug, getAllHeader } from '../lib/api';
-import { HeaderMenus } from "@/lib/queries/type"
+import { Data } from "@/lib/queries/type"
 import Link from "next/link";
 
 type Props = {
-  headerMenus: HeaderMenus
+  headerMenus: Data
 };
 
 
@@ -15,9 +15,9 @@ export default function Header({ headerMenus }: Props) {
     <header className={css.header}>
       <Link href="/graphql"><a><h2>HEADER</h2></a></Link>
       <ul>
-        {headerMenus?.edges.map((menu, i) => (
+        {headerMenus?.headerMenus?.edges.map((menu, i) => (
           <li key={i}>
-            <Link href={menu.node.path}>
+            <Link href={menu?.node?.path}>
               <a>
                 {menu?.node?.label}
               </a>

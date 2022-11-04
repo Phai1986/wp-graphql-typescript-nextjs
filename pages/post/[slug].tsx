@@ -1,7 +1,7 @@
 import React from "react";
-import { getAllPagesWithSlugs, getPageBySlug, getAllPostsWithSlugs, getPostBySlug ,getAllHeader} from '../../lib/api';
+import { getHeader, getPosts, getPostBySlug} from '@/lib/api';
 import Head from 'next/head';
-import styles from '../../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 
 
 //----------------POSTS-----------------//
@@ -22,16 +22,16 @@ export default function Post({post}:any) {
 }
 
 export async function getStaticPaths() {
-    const postsWithSlugs = await getAllPostsWithSlugs();
+    const postsWithSlugs = await getPosts();
     return {
-        paths: postsWithSlugs?.edges.map(({ node }:any) => `/post/${node.slug}`) || [],
+        paths: postsWithSlugs?.posts?.edges.map(({ node }:any) => `/post/${node.slug}`) || [],
         fallback: true,
     };
 }
 
 export async function getStaticProps({ params }:any) {
     const post = await getPostBySlug(params.slug);
-    const headerMenus = await getAllHeader()
+    const headerMenus = await getHeader()
     return {
         props: {post,headerMenus}
     };
