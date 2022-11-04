@@ -1,5 +1,5 @@
 import React from "react";
-import { getAllHeader} from '../lib/api';
+import { getHeader} from '@/lib/api';
 
 type Props = {};
 
@@ -13,7 +13,7 @@ export default function index({}: Props) {
 
 
 export async function getStaticProps() {
-  const headerMenus = await getAllHeader()
+  const headerMenus = await getHeader()
   return {
       props: {headerMenus}
   };

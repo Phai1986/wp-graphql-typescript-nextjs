@@ -1,6 +1,6 @@
 import React from "react";
 import { GetStaticProps } from 'next'
-import { getHeader } from '../lib/api';
+import { getHeader } from '@/lib/api';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 import { GET_CONTENT, GET_URI } from "@/lib/queries/get-wp";
 import { Data } from "@/lib/queries/type"
