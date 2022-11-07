@@ -17,8 +17,8 @@ export default function Page({ page }: any) {
             </Head>
             <Container>
                 <div className={styles.main}>
-                    {page.title && <h1 className='title'>{page.title}</h1>}
-                    {page.content && <div className='content' dangerouslySetInnerHTML={{ __html: page.content }} />}
+                    {page.title && <h1 className='title'>{page?.title}</h1>}
+                    {page.content && <div className='content' dangerouslySetInnerHTML={{ __html: page?.content }} />}
                 </div>
             </Container>
         </>
