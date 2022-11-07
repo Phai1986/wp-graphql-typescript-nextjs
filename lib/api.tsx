@@ -1,4 +1,4 @@
-import {GET_URI, GET_HEADER, GET_POSTS, GET_PAGES} from '@/lib/queries/get-wp'
+import { GET_URI, GET_HEADER, GET_POSTS, GET_PAGES } from '@/lib/queries/get-wp'
 
 async function fetchAPI(query: any, { variables }: any = {}) {
   const headers = { 'Content-Type': 'application/json' };
@@ -41,6 +41,9 @@ export async function getPostBySlug(slug: any) {
       video {
         videoSource
         videoUrl
+        coverImage {
+          sourceUrl
+        }
       }
     }
   }

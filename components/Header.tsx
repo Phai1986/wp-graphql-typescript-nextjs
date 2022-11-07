@@ -25,10 +25,10 @@ export default function Header({ headerMenus }: Props) {
             {headerMenus?.headerMenus?.edges.map((menu, i) => (
               <>
                 {menu?.node?.childItems?.nodes?.length > 0 &&
-                  <NavDropdown title={menu?.node?.label} id="basic-nav-dropdown">{menu?.node?.childItems?.nodes.map((sub, j) =>   (<Link href={sub?.path}><a className="dropdown-item">{sub?.label}</a></Link>)
+                  <NavDropdown title={menu?.node?.label} id="basic-nav-dropdown" key={i}>{menu?.node?.childItems?.nodes.map((sub, j) =>   (<Link href={sub?.path} key={j}><a className="dropdown-item">{sub?.label}</a></Link>)
                   )}
                   </NavDropdown>}
-                {!menu?.node?.childItems?.nodes?.length && <Link href={menu?.node?.path}><a className="nav-link">{menu?.node?.label}</a></Link>}
+                {!menu?.node?.childItems?.nodes?.length && <Link href={menu?.node?.path} key={i}><a className="nav-link">{menu?.node?.label}</a></Link>}
               </>
             ))}
           </Nav>

@@ -81,6 +81,9 @@ export const GET_POSTS = `
         video {
           videoSource
           videoUrl
+          coverImage {
+            sourceUrl
+          }
         }
       }
     }
