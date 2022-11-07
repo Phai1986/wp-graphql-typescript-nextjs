@@ -18,7 +18,7 @@ export default function Header({ headerMenus }: Props) {
   return (
     <Navbar bg="light" expand="lg" sticky="top">
       <Container>
-        <Navbar.Brand>WP GraphQL / TypeScript</Navbar.Brand>
+        <Navbar.Brand><img width="60" src="https://www.freelogodesign.org/assets/img/logo-style/type-image.jpg" /> WP GraphQL / TypeScript</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
