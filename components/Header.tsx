@@ -18,7 +18,7 @@ export default function Header({ headerMenus }: Props) {
   return (
     <Navbar bg="light" expand="lg" sticky="top">
       <Container>
-        <Navbar.Brand><img width="60" src="https://www.freelogodesign.org/assets/img/logo-style/type-image.jpg" /> WP GraphQL / TypeScript</Navbar.Brand>
+        <Navbar.Brand><img width="60" src="https://static.vecteezy.com/system/resources/previews/000/232/644/non_2x/tree-logo-abstract-design-logo-negative-space-style-vector.jpg" /> WP GraphQL / TypeScript</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">

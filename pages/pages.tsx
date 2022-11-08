@@ -25,7 +25,7 @@ export default function Pages({ pages }: Props) {
                 <h1 className="text-center" style={{ margin: '40px 0' }}>PAGES</h1>
                 <Row>
                     {pages?.pages?.edges.map((page, i) => (
-                        <Col lg={4} style={{ margin: '0 0 25px' }}>
+                        <Col lg={4} key={i} style={{ margin: '0 0 25px' }}>
                             <Card style={{ width: '100%' }}>
                                 <Card.Img variant="top" src="https://slp-statics.astockcdn.net/static_assets/staging/22fall/homepage/curated-collections/card-2.jpg?width=580" />
                                 <Card.Body>

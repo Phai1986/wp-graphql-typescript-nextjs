@@ -32,10 +32,11 @@ export default function Post({ post }: any) {
     );
 }
 
+
 export async function getStaticPaths() {
     const postsWithSlugs = await getPosts();
     return {
-        paths: postsWithSlugs?.posts?.edges.map(({ node }: any) => `/post/${node.slug}`) || [],
+        paths: postsWithSlugs?.posts?.edges.map(({ node }: any) => `/posts/${node.slug}`) || [],
         fallback: true,
     };
 }
